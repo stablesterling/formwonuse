@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Dearest 💕</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Poppins', 'Quicksand', sans-serif;
+}
+
+body {
+    overflow: hidden;
+    background: #f5ede4;
+}
+
+/* ===== PAGES ===== */
+.page {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.page.active {
+    display: flex;
+    animation: fadeInPage 0.8s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== OVERLAY ===== */
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.page > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== PAGE 1 - WELCOME (Warm Peach) ===== */
+.bg-welcome {
+    background-image: url('C:/Users/USER/Downloads/webpage prop/images (5).jpg');
+    background-size: cover;
+    background-position: center;
+}
+.bg-welcome::before {
+    background: rgba(255, 200, 180, 0.35);
+}
+
+.bg-welcome .card {
+    background: rgba(255, 240, 235, 0.88);
+    border: 2px solid rgba(255, 182, 160, 0.4);
+}
+
+.bg-welcome h1 {
+    background: linear-gradient(135deg, #e8a87c, #d4a0a0, #e8a87c);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite;
+}
+
+/* ===== PAGE 2 - SEARCH (Soft Lavender) ===== */
+.bg-search {
+    background-image: url('C:/Users/USER/Downloads/webpage prop/6a62f94be8ce1bc2ae4688a457d620b0.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.bg-search::before {
+    background: rgba(200, 180, 220, 0.35);
+}
+
+.bg-search .card {
+    background: rgba(240, 235, 248, 0.88);
+    border: 2px solid rgba(200, 180, 220, 0.4);
+}
+
+.bg-search h1 {
+    background: linear-gradient(135deg, #b8a0c8, #d4a0d4, #b8a0c8);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite;
+}
+
+/* ===== PAGE 3 - STORY (Mint Green) ===== */
+.bg-story {
+    background-image: url('C:/Users/USER/Downloads/webpage prop/images (4).jpg');
+    background-size: cover;
+    background-position: center;
+}
+.bg-story::before {
+    background: rgba(180, 220, 200, 0.35);
+}
+
+.bg-story .card {
+    background: rgba(235, 248, 240, 0.88);
+    border: 2px solid rgba(180, 220, 200, 0.4);
+}
+
+.bg-story h1 {
+    background: linear-gradient(135deg, #8aa88a, #a8c8a8, #8aa88a);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite;
+}
+
+/* ===== PAGE 4 - PROPOSAL (Rose Pink) ===== */
+.bg-proposal {
+    background-image: url('C:/Users/USER/Downloads/webpage prop/images (3).jpg');
+    background-size: cover;
+    background-position: center;
+}
+.bg-proposal::before {
+    background: rgba(220, 180, 190, 0.35);
+}
+
+.bg-proposal .card {
+    background: rgba(248, 235, 240, 0.88);
+    border: 2px solid rgba(220, 180, 190, 0.4);
+}
+
+.bg-proposal h1 {
+    background: linear-gradient(135deg, #d4a0a0, #e8b8b8, #d4a0a0);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite;
+}
+
+/* ===== PAGE 5 - SUCCESS (Golden Yellow) ===== */
+.bg-success {
+    background-image: url('C:/Users/USER/Downloads/webpage prop/images (2).jpg');
+    background-size: cover;
+    background-position: center;
+}
+.bg-success::before {
+    background: rgba(220, 210, 170, 0.35);
+}
+
+.bg-success .card {
+    background: rgba(248, 245, 235, 0.88);
+    border: 2px solid rgba(220, 210, 170, 0.4);
+}
+
+.bg-success h1 {
+    background: linear-gradient(135deg, #d4b87a, #e8d4a0, #d4b87a);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite;
+}
+
+/* ===== GLASS CARD ===== */
+.card {
+    backdrop-filter: blur(20px);
+    padding: 45px;
+    border-radius: 40px;
+    max-width: 700px;
+    width: 92%;
+    color: #5a4a3a;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 60%);
+    pointer-events: none;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin-bottom: 20px;
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+h2 {
+    margin: 20px 0;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 600;
+}
+
+.bg-welcome h2 { color: #d4a0a0; }
+.bg-search h2 { color: #b8a0c8; }
+.bg-story h2 { color: #8aa88a; }
+.bg-proposal h2 { color: #d4a0a0; }
+.bg-success h2 { color: #d4b87a; }
+
+p {
+    line-height: 2;
+    margin: 12px 0;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: #5a4a3a;
+}
+
+/* ===== FLOATING ELEMENTS ===== */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-item {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.12;
+    animation: floatItem linear infinite;
+}
+
+@keyframes floatItem {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    10% { opacity: 0.12; }
+    90% { opacity: 0.12; }
+    100% {
+        transform: translateY(-10vh) rotate(720deg) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ===== SEARCH BOX ===== */
+.search-box {
+    background: rgba(255, 255, 255, 0.5);
+    color: #5a4a3a;
+    padding: 20px 28px;
+    border-radius: 60px;
+    margin: 20px 0;
+    border: 2px solid rgba(255, 182, 193, 0.3);
+    backdrop-filter: blur(10px);
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== LOADING BAR ===== */
+.loading-container {
+    margin: 25px 0;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: rgba(188, 170, 150, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #b8a0c8, #d4a0d4, #b8a0c8);
+    background-size: 200% 100%;
+    border-radius: 10px;
+    animation: loadingProgress 2.5s ease-in-out forwards, shimmer 1.5s infinite;
+}
+
+@keyframes loadingProgress {
+    0% { width: 0%; }
+    20% { width: 15%; }
+    40% { width: 35%; }
+    60% { width: 55%; }
+    80% { width: 80%; }
+    100% { width: 100%; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.loading-text {
+    font-size: 0.9rem;
+    color: #b8a0c8;
+    margin-top: 5px;
+    animation: pulseText 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* ===== HIDDEN CONTENT ===== */
+.hidden-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.8s ease-in-out;
+}
+
+.hidden-content.visible {
+    opacity: 1;
+    max-height: 1000px;
+}
+
+/* ===== BUTTONS ===== */
+button {
+    border: none;
+    padding: 16px 38px;
+    border-radius: 60px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 10px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+button:hover::after {
+    opacity: 1;
+}
+
+.yes-btn {
+    background: linear-gradient(135deg, #d4a0a0, #c49a9a);
+    color: white;
+    box-shadow: 0 8px 32px rgba(212, 160, 160, 0.4);
+}
+
+.yes-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(212, 160, 160, 0.6);
+}
+
+.no-btn {
+    background: rgba(188, 170, 150, 0.15);
+    color: #5a4a3a;
+    border: 1px solid rgba(188, 170, 150, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.no-btn:hover {
+    background: rgba(188, 170, 150, 0.25);
+    transform: translateY(-3px);
+}
+
+/* ===== PROPOSAL BUTTONS ===== */
+.proposal-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+#yesBtn {
+    background: linear-gradient(135deg, #d4a0a0, #c49a9a);
+    color: white;
+    box-shadow: 0 8px 32px rgba(212, 160, 160, 0.4);
+    font-size: 22px;
+    padding: 18px 50px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#yesBtn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 48px rgba(212, 160, 160, 0.6);
+}
+
+#noBtn {
+    background: rgba(188, 170, 150, 0.12);
+    color: #5a4a3a;
+    border: 1px solid rgba(188, 170, 150, 0.2);
+    font-size: 18px;
+    padding: 16px 40px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== FUNNY TEXT ===== */
+#funnyText {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    min-height: 40px;
+    color: #d4a0a0;
+    animation: bounceText 0.5s ease-out;
+}
+
+@keyframes bounceText {
+    0% { transform: scale(0.8); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== SUCCESS PAGE ===== */
+.bg-success .card {
+    border-color: rgba(220, 210, 170, 0.3);
+    box-shadow: 0 30px 80px rgba(220, 210, 170, 0.2);
+}
+
+.bg-success h1 {
+    font-size: clamp(3rem, 7vw, 5rem);
+    animation: heartBeat 1.2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.2); }
+    70% { transform: scale(1); }
+}
+
+/* ===== RAIN EFFECT ===== */
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.rain-drop {
+    position: absolute;
+    font-size: 28px;
+    animation: dropRain linear forwards;
+}
+
+@keyframes dropRain {
+    0% {
+        transform: translateY(-10vh) rotate(0deg) scale(0.3);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(5vh) rotate(20deg) scale(0.8);
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ===== SPARKLES ===== */
+.sparkle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: #d4a0a0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99;
+    animation: sparkleFade 1s ease-out forwards;
+}
+
+@keyframes sparkleFade {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* ===== CAT DECORATIONS ===== */
+.cat-deco {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.08;
+    z-index: 0;
+    animation: floatCat 6s ease-in-out infinite;
+}
+
+@keyframes floatCat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .card {
+        padding: 30px 20px;
+        border-radius: 30px;
+    }
+    
+    button {
+        font-size: 16px;
+        padding: 14px 28px;
+    }
+    
+    #yesBtn {
+        font-size: 18px;
+        padding: 16px 35px;
+    }
+    
+    #noBtn {
+        font-size: 16px;
+        padding: 14px 30px;
+    }
+    
+    .proposal-buttons {
+        gap: 12px;
+    }
+    
+    .search-box {
+        padding: 16px 20px;
+        font-size: 1rem;
+    }
+    
+    .cat-deco {
+        display: none;
+    }
+    
+    .loading-container {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 25px 16px;
+        border-radius: 24px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+    
+    .yes-btn, .no-btn {
+        font-size: 14px;
+        padding: 12px 22px;
+        margin: 6px;
+    }
+    
+    #yesBtn {
+        font-size: 16px;
+        padding: 14px 28px;
+    }
+    
+    #noBtn {
+        font-size: 14px;
+        padding: 12px 24px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== FLOATING ELEMENTS ===== -->
+<div class="floating-elements" id="floatingElements"></div>
+
+<!-- ===== CAT DECORATIONS ===== -->
+<div class="cat-deco" style="top:5%; left:3%; font-size:3rem;">🐱</div>
+<div class="cat-deco" style="bottom:8%; right:2%; font-size:2.5rem; animation-delay:2s;">🌸</div>
+<div class="cat-deco" style="top:15%; right:5%; font-size:2rem; animation-delay:3s;">🍦</div>
+<div class="cat-deco" style="bottom:20%; left:4%; font-size:2.8rem; animation-delay:1.5s;">🌺</div>
+
+<!-- ===== AUDIO ===== -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===== PAGE 1 - WELCOME (Warm Peach) ===== -->
+<section id="page1" class="page active bg-welcome">
+    <div class="card">
+        <h1>Hi Mwonuseeeeee 💕</h1>
+        <p style="font-size:1.5rem;">🐱</p>
+        <p>I made something special just for you...</p>
+        <p style="font-size:0.9rem; opacity:0.7;">Please don't judge my web development skills too harshly 😅</p>
+        <br>
+        <button class="yes-btn" onclick="nextPage(2)">
+            Continue ✨
+        </button>
+    </div>
+</section>
+
+<!-- ===== PAGE 2 - SEARCH (Soft Lavender) ===== -->
+<section id="page2" class="page bg-search">
+    <div class="card">
+        <h1>🔍 Curious Search</h1>
+        
+        <!-- Search Box - Always Visible -->
+        <div class="search-box">
+            "Why did i make a whole website?"
+        </div>
+        
+        <!-- Loading Bar - Always Visible during loading -->
+        <div class="loading-container">
+            <div class="loading-bar-bg">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            <p class="loading-text" id="loadingText">Consulting the cat council... 🐱</p>
+        </div>
+        
+        <!-- Content that appears after loading completes -->
+        <div class="hidden-content" id="searchResult">
+            <br>
+            <h2>🎯 1 Result Found</h2>
+            <p style="font-size:1.1rem; color: #b8a0c8;">
+                Because honestly some feelings are too big for a text message 💕
+            </p>
+            <br>
+            <button class="yes-btn" onclick="nextPage(3, true)">
+                Open Result ✨
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PAGE 3 - STORY (Mint Green) ===== -->
+<section id="page3" class="page bg-story">
+    <div class="card">
+        <h1>💭 Something I Realized</h1>
+        
+        <!-- Content appears one by one -->
+        <div class="hidden-content" id="storyContent">
+            <p>Over time, you became someone I genuinely <strong>look forward to talking to</strong>.</p>
+            <p>Someone who makes ordinary days feel a little <strong>warmer</strong>.</p>
+            <p>Someone who makes me smile like a silly cat 🐱</p>
+            <br>
+            <p style="font-size:0.95rem; opacity:0.7;">Honestly, this website was supposed to be a simple message...</p>
+            <p style="font-size:0.95rem; opacity:0.7;">But then I kept adding things.</p>
+            <p style="font-size:0.95rem; opacity:0.7;">And now you're reading a whole website 🙈</p>
+            <br>
+            <button class="yes-btn" onclick="nextPage(4)">
+                Tell Me More 💕
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PAGE 4 - PROPOSAL (Rose Pink) ===== -->
+<section id="page4" class="page bg-proposal">
+    <div class="card">
+        <h1>🌸 Hey Beautiful</h1>
+        
+        <div id="proposalContent">
+            <p>After thinking about it for quite a while (and asking my cat for advice 🐱)...</p>
+            <p>I realized <strong>I really like you</strong>.</p>
+            <p>I like talking to you. I like your company.</p>
+            <p style="font-size:1.1rem; color: #d4a0a0; margin-top: 10px;">
+                And I'd love to see where this goes 💫
+            </p>
+            <br>
+            <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.8rem);">
+                Will you be my girlfriend? 🍦🌸
+            </h2>
+            <br>
+            <div class="proposal-buttons">
+                <button id="yesBtn" onclick="yesClicked()">
+                    YES ❤️
+                </button>
+                <button id="noBtn" onclick="noClicked()">
+                    NO 🤔
+                </button>
+            </div>
+            <p id="funnyText"></p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PAGE 5 - SUCCESS (Golden Yellow) ===== -->
+<section id="page5" class="page bg-success">
+    <div class="card">
+        <h1>❤️</h1>
+        <h2>You just made this website worth building 🥹</h2>
+        <p>More importantly...</p>
+        <p style="font-size:1.3rem; color: #d4b87a;">
+            You just made me <strong> very very very very happy</strong>.
+        </p>
+        <p>I don't know exactly what the future looks like.</p>
+        <p>But I'd really like to find out with you. 💕</p>
+        <br>
+        <p style="font-size:1.2rem;">🐱🍦🌸</p>
+        <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: #d4b87a;">
+            Thank you for saying yes, my mwonusssee ❤️
+        </h2>
+        <br>
+        <p style="font-size:1.2rem; color: rgba(90, 74, 58, 0.6);">
+            - With all my heart 💕
+        </p>
+    </div>
+</section>
+
+<script>
+// ===== DISCORD WEBHOOK (Hidden - No visual indicators) =====
+const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1517232704947622090/BIhg1IUytp7pSm0cKzMoiZIOJq9x7pIDsUgOk1nPoCWaDDGRMUHvq6V1stT4fhsZv-j3';
+
+// ===== FLOATING ELEMENTS =====
+function createFloatingElements() {
+    const container = document.getElementById('floatingElements');
+    const emojis = ['🐱', '🌸', '🍦', '💕', '🌺', '✨', '🌷', '🐾', '💗', '🌻'];
+    
+    for (let i = 0; i < 35; i++) {
+        const item = document.createElement('div');
+        item.className = 'floating-item';
+        item.textContent = emojis[i % emojis.length];
+        item.style.left = Math.random() * 100 + '%';
+        item.style.animationDuration = (20 + Math.random() * 30) + 's';
+        item.style.animationDelay = (Math.random() * 20) + 's';
+        item.style.fontSize = (14 + Math.random() * 24) + 'px';
+        container.appendChild(item);
+    }
+}
+createFloatingElements();
+
+// ===== DISCORD NOTIFICATION FUNCTION (Silent - No visual feedback) =====
+function sendDiscordNotification(emoji, title, message, color = null) {
+    const embedColor = color || (emoji === '🎉' ? 0x4CAF50 : 0xf44336);
+    
+    const payload = {
+        embeds: [{
+            title: `${emoji} ${title}`,
+            description: message,
+            color: embedColor,
+            timestamp: new Date().toISOString(),
+            footer: {
+                text: `💕 From the Proposal Website`
+            },
+            fields: [
+                {
+                    name: "🕐 Time",
+                    value: new Date().toLocaleString(),
+                    inline: true
+                },
+                {
+                    name: "💖 Status",
+                    value: emoji === '🎉' ? "SHE SAID YES! 🥳" : "She clicked NO 😅",
+                    inline: true
+                }
+            ]
+        }]
+    };
+    
+    fetch(DISCORD_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('✅ Discord notification sent silently');
+        }
+    })
+    .catch(error => {
+        console.error('Error sending to Discord:', error);
+    });
+}
+
+// ===== MAIN NOTIFICATION FUNCTION (Silent - No popups) =====
+function sendNotification(emoji, title, message) {
+    // Only send to Discord - NO on-screen notifications
+    sendDiscordNotification(emoji, title, message);
+}
+
+// ===== LOADING BAR SIMULATION =====
+function simulateLoading() {
+    const loadingTexts = [
+        'Searching the universe... 🌌',
+        'Consulting cat council... 🐱',
+        'Ignoring common sense... 😅',
+        'Processing feelings... 💕',
+        'Almost there... ✨'
+    ];
+    
+    const textElement = document.getElementById('loadingText');
+    const resultElement = document.getElementById('searchResult');
+    let index = 0;
+    
+    const interval = setInterval(() => {
+        index = (index + 1) % loadingTexts.length;
+        if (textElement) {
+            textElement.textContent = loadingTexts[index];
+        }
+    }, 600);
+    
+    setTimeout(() => {
+        clearInterval(interval);
+        if (textElement) {
+            textElement.textContent = '✅ 100% Complete! Found something amazing! 🎉';
+        }
+        if (resultElement) {
+            resultElement.classList.add('visible');
+        }
+    }, 3000);
+}
+
+// ===== STORY CONTENT SEQUENTIAL REVEAL =====
+function revealStoryContent() {
+    const container = document.getElementById('storyContent');
+    if (!container) return;
+    
+    container.classList.add('visible');
+    
+    const elements = container.children;
+    const totalElements = elements.length;
+    let currentIndex = 0;
+    
+    for (let i = 1; i < totalElements; i++) {
+        elements[i].style.opacity = '0';
+        elements[i].style.transform = 'translateY(15px)';
+        elements[i].style.transition = 'all 0.6s ease-out';
+    }
+    
+    const revealInterval = setInterval(() => {
+        if (currentIndex < totalElements) {
+            const el = elements[currentIndex];
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            currentIndex++;
+        } else {
+            clearInterval(revealInterval);
+        }
+    }, 600);
+}
+
+// ===== PAGE NAVIGATION =====
+function nextPage(page, music = false) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const targetPage = document.getElementById('page' + page);
+    targetPage.classList.add('active');
+    
+    if (music) {
+        const audio = document.getElementById('bgMusic');
+        audio.play().catch(() => {});
+    }
+    
+    if (page === 2) {
+        setTimeout(() => {
+            simulateLoading();
+        }, 500);
+    }
+    
+    if (page === 3) {
+        setTimeout(() => {
+            revealStoryContent();
+        }, 600);
+    }
+    
+    if (page === 4) {
+        const proposalContent = document.getElementById('proposalContent');
+        if (proposalContent) {
+            proposalContent.style.opacity = '0';
+            proposalContent.style.transform = 'translateY(20px)';
+            proposalContent.style.transition = 'all 0.8s ease-out';
+            setTimeout(() => {
+                proposalContent.style.opacity = '1';
+                proposalContent.style.transform = 'translateY(0)';
+            }, 300);
+        }
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== PROPOSAL LOGIC =====
+let noClicks = 0;
+const messages = [
+    "Are you sure? 🤔",
+    "Maybe read the question again 😄",
+    "I spent a concerning amount of time building this 😅",
+    "The NO button seems to be shrinking... 👀",
+    "Even my cat thinks you should say YES! 🐱",
+    "This feels statistically unlikely! 📊",
+    "You're testing my JavaScript now 🧪",
+    "Okay this is getting suspicious 😂",
+    "I'll just keep asking... 💕",
+    "The universe says YES! 🌌",
+    "Come onnnn... 🥺",
+    "Last chance! 🙈"
+];
+
+function noClicked() {
+    noClicks++;
+    const funnyText = document.getElementById("funnyText");
+    const messageIndex = Math.min(noClicks - 1, messages.length - 1);
+    const currentMessage = messages[messageIndex];
+    funnyText.textContent = currentMessage;
+    
+    // Send Discord notification (silent - no visual feedback)
+    sendNotification('😅', 'She Clicked NO!', `Attempt #${noClicks}: "${currentMessage}"`);
+    
+    funnyText.style.animation = 'none';
+    setTimeout(() => {
+        funnyText.style.animation = 'bounceText 0.5s ease-out';
+    }, 10);
+    
+    const yes = document.getElementById("yesBtn");
+    const no = document.getElementById("noBtn");
+    
+    const scale = 1 + (noClicks * 0.12);
+    yes.style.transform = `scale(${Math.min(scale, 2)})`;
+    yes.style.fontSize = `${Math.min(18 + noClicks * 2, 36)}px`;
+    yes.style.boxShadow = `0 8px 48px rgba(212, 160, 160, ${0.4 + noClicks * 0.05})`;
+    
+    const noScale = Math.max(0.1, 1 - (noClicks * 0.1));
+    no.style.transform = `scale(${noScale})`;
+    no.style.opacity = Math.max(0.1, 1 - (noClicks * 0.08));
+    
+    createSparkle();
+}
+
+function yesClicked() {
+    // Send Discord notification (silent - no visual feedback)
+    sendNotification('🎉', 'SHE SAID YES! ❤️', 'She agreed to be your girlfriend! 🥳💕');
+    
+    document.getElementById('bgMusic').play().catch(() => {});
+    nextPage(5);
+    createRain();
+    createSparkles();
+}
+
+// ===== RAIN EFFECT =====
+function createRain() {
+    const emojis = ['💖', '❤️', '💕', '✨', '🌸', '💗', '🌺', '💓', '🐱', '🍦'];
+    const container = document.createElement('div');
+    container.className = 'rain-container';
+    document.body.appendChild(container);
+    
+    for (let i = 0; i < 200; i++) {
+        setTimeout(() => {
+            const drop = document.createElement('div');
+            drop.className = 'rain-drop';
+            drop.textContent = emojis[i % emojis.length];
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (2 + Math.random() * 4) + 's';
+            drop.style.fontSize = (16 + Math.random() * 32) + 'px';
+            drop.style.animationDelay = '0s';
+            container.appendChild(drop);
+            
+            setTimeout(() => {
+                drop.remove();
+            }, 6000);
+        }, i * 30);
+    }
+    
+    setTimeout(() => {
+        container.remove();
+    }, 8000);
+}
+
+// ===== SPARKLES =====
+function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = (Math.random() * 80 + 10) + '%';
+    sparkle.style.top = (Math.random() * 80 + 10) + '%';
+    sparkle.style.width = (2 + Math.random() * 6) + 'px';
+    sparkle.style.height = sparkle.style.width;
+    sparkle.style.background = `hsl(${Math.random() * 60 + 330}, 60%, 70%)`;
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000);
+}
+
+function createSparkles() {
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            createSparkle();
+        }, i * 100);
+    }
+}
+</script>
+</body>
+</html>
