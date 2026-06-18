@@ -58,7 +58,7 @@ body {
 
 /* ===== PAGE 1 - WELCOME (Warm Peach) ===== */
 .bg-welcome {
-    background-image: url('C:/Users/USER/Downloads/webpage prop/images (5).jpg');
+    background-image: url('https://stablesterling.github.io/formwonuse/1.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -81,7 +81,7 @@ body {
 
 /* ===== PAGE 2 - SEARCH (Soft Lavender) ===== */
 .bg-search {
-    background-image: url('C:/Users/USER/Downloads/webpage prop/6a62f94be8ce1bc2ae4688a457d620b0.jpg');
+    background-image: url('https://stablesterling.github.io/formwonuse/2.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -104,7 +104,7 @@ body {
 
 /* ===== PAGE 3 - STORY (Mint Green) ===== */
 .bg-story {
-    background-image: url('C:/Users/USER/Downloads/webpage prop/images (4).jpg');
+    background-image: url('https://stablesterling.github.io/formwonuse/3.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -127,7 +127,7 @@ body {
 
 /* ===== PAGE 4 - PROPOSAL (Rose Pink) ===== */
 .bg-proposal {
-    background-image: url('C:/Users/USER/Downloads/webpage prop/images (3).jpg');
+    background-image: url('https://stablesterling.github.io/formwonuse/4.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -150,7 +150,7 @@ body {
 
 /* ===== PAGE 5 - SUCCESS (Golden Yellow) ===== */
 .bg-success {
-    background-image: url('C:/Users/USER/Downloads/webpage prop/images (2).jpg');
+    background-image: url('https://stablesterling.github.io/formwonuse/1.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -619,9 +619,10 @@ button:hover::after {
 <div class="cat-deco" style="top:15%; right:5%; font-size:2rem; animation-delay:3s;">🍦</div>
 <div class="cat-deco" style="bottom:20%; left:4%; font-size:2.8rem; animation-delay:1.5s;">🌺</div>
 
-<!-- ===== AUDIO ===== -->
-<audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
+<!-- ===== AUDIO - Background Music (Auto-plays) ===== -->
+<audio id="bgMusic" loop autoplay>
+    <source src="https://stablesterling.github.io/formwonuse/propp.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
 </audio>
 
 <!-- ===== PAGE 1 - WELCOME (Warm Peach) ===== -->
@@ -1026,6 +1027,19 @@ function createSparkles() {
         }, i * 100);
     }
 }
+
+// ===== AUTO-PLAY MUSIC ON PAGE LOAD =====
+window.addEventListener('load', function() {
+    const audio = document.getElementById('bgMusic');
+    audio.play().catch(function(error) {
+        console.log('Auto-play was blocked by browser. User interaction required.');
+        // Show a small hint to click anywhere to start music
+        document.addEventListener('click', function playOnClick() {
+            audio.play();
+            document.removeEventListener('click', playOnClick);
+        }, { once: true });
+    });
+});
 </script>
 </body>
 </html>
