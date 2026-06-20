@@ -25,6 +25,45 @@
             overflow-x: hidden;
         }
 
+        /* ===== FLOATING LOVE / FLOWER ELEMENTS ===== */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-elements span {
+            position: absolute;
+            display: block;
+            font-size: 2.2rem;
+            animation: floatUp 14s ease-in-out infinite;
+            opacity: 0.15;
+            transform: translateY(120vh) rotate(0deg);
+        }
+
+        .floating-elements span:nth-child(1) { left: 8%; animation-duration: 18s; animation-delay: 0s; font-size: 2.8rem; }
+        .floating-elements span:nth-child(2) { left: 22%; animation-duration: 22s; animation-delay: 2s; font-size: 2rem; }
+        .floating-elements span:nth-child(3) { left: 38%; animation-duration: 20s; animation-delay: 4s; font-size: 3.2rem; }
+        .floating-elements span:nth-child(4) { left: 55%; animation-duration: 24s; animation-delay: 1s; font-size: 2.4rem; }
+        .floating-elements span:nth-child(5) { left: 70%; animation-duration: 19s; animation-delay: 3s; font-size: 2.6rem; }
+        .floating-elements span:nth-child(6) { left: 85%; animation-duration: 21s; animation-delay: 5s; font-size: 2.0rem; }
+        .floating-elements span:nth-child(7) { left: 15%; animation-duration: 23s; animation-delay: 6s; font-size: 1.8rem; }
+        .floating-elements span:nth-child(8) { left: 48%; animation-duration: 17s; animation-delay: 2.5s; font-size: 2.2rem; }
+        .floating-elements span:nth-child(9) { left: 63%; animation-duration: 25s; animation-delay: 3.5s; font-size: 3rem; }
+        .floating-elements span:nth-child(10) { left: 92%; animation-duration: 20s; animation-delay: 0.5s; font-size: 2.0rem; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(120vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+        }
+
         /* ============================================
                    LOADING SCREEN
                 ============================================ */
@@ -118,6 +157,23 @@
         .card.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ===== DECORATIVE RIBBON ===== */
+        .card::before {
+            content: '🌸💐🍦💕';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            background: rgba(255, 252, 253, 0.85);
+            padding: 0 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 200, 215, 0.3);
+            box-shadow: 0 2px 12px rgba(180, 70, 100, 0.08);
         }
 
         /* ============================================
@@ -643,6 +699,20 @@
 </head>
 <body>
 
+    <!-- ===== FLOATING LOVE / FLOWER / ICE CREAM ELEMENTS ===== -->
+    <div class="floating-elements">
+        <span>🌸</span>
+        <span>💐</span>
+        <span>🍦</span>
+        <span>💕</span>
+        <span>🌹</span>
+        <span>💖</span>
+        <span>🌺</span>
+        <span>🍫</span>
+        <span>💗</span>
+        <span>🌷</span>
+    </div>
+
     <!-- ==========================================
     BACKGROUND MUSIC (Auto-plays)
     ========================================== -->
@@ -690,7 +760,7 @@
                 <span>💕</span>
             </h1>
             <div class="subhead">✨ I genuinely want to know the real you ✨</div>
-            <div class="her-name-badge">👩 <span id="herNameDisplay">[your name]</span></div>
+            <div class="her-name-badge">👩 <span id="herNameDisplay">[Lechuzzz💕]</span></div>
         </div>
 
         <!-- ===== TYPEWRITER INTRO ===== -->
@@ -911,7 +981,7 @@
             // TYPEWRITER EFFECT
             // ============================================
             const typewriterEl = document.getElementById('typewriter-text');
-            const herName = "you"; // <-- CHANGE THIS TO HER NAME!
+            const herName = "Lechusssss💕"; // <-- CHANGE THIS TO HER NAME!
 
             const typewriterLines = [
                 `Hey <span class="highlight">${herName}</span> 👋`,
