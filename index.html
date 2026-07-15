@@ -1,1409 +1,700 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>🌸 Getting to Know You ✨</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(145deg, #fce4ec 0%, #f8d7e3 50%, #fce4ec 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 15px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* ===== FLOATING LOVE / FLOWER ELEMENTS ===== */
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .floating-elements span {
-            position: absolute;
-            display: block;
-            font-size: 2.2rem;
-            animation: floatUp 14s ease-in-out infinite;
-            opacity: 0.15;
-            transform: translateY(120vh) rotate(0deg);
-        }
-
-        .floating-elements span:nth-child(1) { left: 8%; animation-duration: 18s; animation-delay: 0s; font-size: 2.8rem; }
-        .floating-elements span:nth-child(2) { left: 22%; animation-duration: 22s; animation-delay: 2s; font-size: 2rem; }
-        .floating-elements span:nth-child(3) { left: 38%; animation-duration: 20s; animation-delay: 4s; font-size: 3.2rem; }
-        .floating-elements span:nth-child(4) { left: 55%; animation-duration: 24s; animation-delay: 1s; font-size: 2.4rem; }
-        .floating-elements span:nth-child(5) { left: 70%; animation-duration: 19s; animation-delay: 3s; font-size: 2.6rem; }
-        .floating-elements span:nth-child(6) { left: 85%; animation-duration: 21s; animation-delay: 5s; font-size: 2.0rem; }
-        .floating-elements span:nth-child(7) { left: 15%; animation-duration: 23s; animation-delay: 6s; font-size: 1.8rem; }
-        .floating-elements span:nth-child(8) { left: 48%; animation-duration: 17s; animation-delay: 2.5s; font-size: 2.2rem; }
-        .floating-elements span:nth-child(9) { left: 63%; animation-duration: 25s; animation-delay: 3.5s; font-size: 3rem; }
-        .floating-elements span:nth-child(10) { left: 92%; animation-duration: 20s; animation-delay: 0.5s; font-size: 2.0rem; }
-
-        @keyframes floatUp {
-            0% { transform: translateY(120vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.2; }
-            90% { opacity: 0.2; }
-            100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
-        }
-
-        /* ============================================
-                   LOADING SCREEN
-                ============================================ */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #fce4ec 0%, #f8d7e3 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        #loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        #loading-screen .loader-emoji {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: pulseLoader 1.2s ease-in-out infinite;
-        }
-
-        @keyframes pulseLoader {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.2) rotate(10deg); }
-        }
-
-        #loading-screen h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #5a1f33;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .loader-bar-container {
-            width: 300px;
-            max-width: 80%;
-            height: 6px;
-            background: rgba(212, 122, 151, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loader-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #d45a7a, #b84164);
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-
-        .loader-text {
-            margin-top: 14px;
-            font-size: 0.9rem;
-            color: #9a6a7e;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        /* ============================================
-                   MAIN CARD
-                ============================================ */
-        .card {
-            max-width: 780px;
-            width: 100%;
-            background: rgba(255, 252, 253, 0.92);
-            backdrop-filter: blur(20px);
-            padding: 45px 45px 40px;
-            border-radius: 50px;
-            box-shadow: 
-                0 40px 80px -20px rgba(180, 70, 100, 0.35),
-                0 0 0 1px rgba(255, 255, 255, 0.8) inset,
-                0 0 0 2px rgba(255, 200, 215, 0.3) inset;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== DECORATIVE RIBBON ===== */
-        .card::before {
-            content: '🌸💐🍦💕';
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2rem;
-            letter-spacing: 8px;
-            background: rgba(255, 252, 253, 0.85);
-            padding: 0 20px;
-            border-radius: 40px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 200, 215, 0.3);
-            box-shadow: 0 2px 12px rgba(180, 70, 100, 0.08);
-        }
-
-        /* ============================================
-                   PROGRESS BAR (Top of Card)
-                ============================================ */
-        .progress-section {
-            margin-bottom: 28px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .progress-track {
-            flex: 1;
-            min-width: 120px;
-            height: 5px;
-            background: rgba(212, 122, 151, 0.15);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #d45a7a, #b84164);
-            border-radius: 10px;
-            transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .progress-text {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #7a2e4a;
-            white-space: nowrap;
-            min-width: 70px;
-            text-align: right;
-        }
-
-        /* ============================================
-                   HEADER
-                ============================================ */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header .deco-line {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #d45a7a, transparent);
-            margin: 0 auto 12px;
-            border-radius: 2px;
-        }
-
-        .header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.4rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            background: linear-gradient(135deg, #5a1f33, #8a3a55);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header .subhead {
-            display: inline-block;
-            background: linear-gradient(135deg, #fceaf0, #fff5f9);
-            padding: 8px 28px;
-            border-radius: 60px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #a0496a;
-            border: 1px solid rgba(255, 200, 215, 0.4);
-            margin-top: 8px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 2px 10px rgba(180, 70, 100, 0.08);
-        }
-
-        .her-name-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #fff5f9, #fceaf0);
-            padding: 6px 30px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #6f2c44;
-            border: 2px solid rgba(212, 122, 151, 0.25);
-            margin-top: 12px;
-            box-shadow: 0 4px 20px rgba(212, 122, 151, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .her-name-badge::after {
-            content: '✨';
-            position: absolute;
-            top: -8px;
-            right: -6px;
-            font-size: 1rem;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.3) rotate(20deg); opacity: 0.6; }
-        }
-
-        .her-name-badge:hover {
-            transform: scale(1.03);
-        }
-
-        /* ============================================
-                   TYPEWRITER INTRO
-                ============================================ */
-        .typewriter-wrapper {
-            background: linear-gradient(135deg, rgba(252, 234, 240, 0.4), rgba(255, 248, 250, 0.6));
-            border-radius: 24px;
-            padding: 18px 24px 20px;
-            margin-bottom: 28px;
-            border: 1px solid rgba(255, 200, 215, 0.2);
-            text-align: center;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #typewriter-text {
-            font-size: 1.05rem;
-            color: #3a1b26;
-            line-height: 1.7;
-            font-weight: 500;
-            min-height: 60px;
-        }
-
-        #typewriter-text .highlight {
-            color: #c95a7a;
-            font-weight: 700;
-        }
-
-        #typewriter-text .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.1em;
-            background: #c95a7a;
-            margin-left: 2px;
-            animation: blink 0.8s step-end infinite;
-            vertical-align: text-bottom;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* ============================================
-                   SECTION TITLES
-                ============================================ */
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #4a1f2d;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 28px 0 16px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(251, 196, 214, 0.3);
-        }
-
-        .section-title .badge {
-            background: linear-gradient(135deg, #d45a7a, #b84164);
-            color: white;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.6rem;
-            padding: 2px 14px;
-            border-radius: 30px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 10px rgba(212, 122, 151, 0.2);
-        }
-
-        .section-title .badge.pink {
-            background: linear-gradient(135deg, #b05a77, #8a4a63);
-        }
-
-        /* ============================================
-                   QUESTIONS
-                ============================================ */
-        .question-block {
-            margin-bottom: 14px;
-            padding: 16px 20px 20px;
-            border-radius: 24px;
-            background: rgba(255, 248, 250, 0.4);
-            border: 1px solid rgba(255, 200, 215, 0.1);
-            transition: all 0.35s ease;
-            position: relative;
-        }
-
-        .question-block:hover {
-            background: rgba(255, 248, 250, 0.7);
-            border-color: rgba(212, 122, 151, 0.15);
-            transform: translateX(4px);
-        }
-
-        .question-block label {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            color: #3a1b26;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-
-        .question-block label .q-emoji {
-            font-size: 1.4rem;
-            line-height: 1.1;
-            flex-shrink: 0;
-        }
-
-        .question-block .q-hint {
-            font-weight: 400;
-            font-size: 0.8rem;
-            color: #9a6a7e;
-            display: block;
-            margin-top: 2px;
-            font-style: italic;
-        }
-
-        .question-block textarea {
-            width: 100%;
-            border: 2px solid rgba(243, 200, 217, 0.3);
-            border-radius: 20px;
-            padding: 12px 16px;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.95rem;
-            resize: vertical;
-            min-height: 56px;
-            background: rgba(255, 255, 255, 0.6);
-            transition: all 0.35s ease;
-            color: #2d141e;
-            line-height: 1.5;
-        }
-
-        .question-block textarea:focus {
-            outline: none;
-            border-color: #d45a7a;
-            box-shadow: 0 0 0 4px rgba(212, 90, 122, 0.06);
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .question-block textarea::placeholder {
-            color: #c5a5b3;
-            font-weight: 400;
-            font-size: 0.9rem;
-        }
-
-        .question-block.about-you {
-            background: rgba(252, 234, 240, 0.3);
-            border-left: 3px solid rgba(212, 90, 122, 0.2);
-        }
-
-        .question-block.about-you:hover {
-            background: rgba(252, 234, 240, 0.5);
-        }
-
-        .question-block.important {
-            background: linear-gradient(135deg, rgba(252, 234, 240, 0.35), rgba(255, 240, 245, 0.35));
-            border: 2px solid rgba(251, 196, 214, 0.25);
-        }
-
-        .question-block.important:hover {
-            border-color: rgba(212, 90, 122, 0.25);
-            background: linear-gradient(135deg, rgba(252, 234, 240, 0.55), rgba(255, 240, 245, 0.55));
-        }
-
-        .question-number {
-            position: absolute;
-            top: -8px;
-            right: 14px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #c5a5b3;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 0 10px;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        /* ============================================
-                   SUBMIT BUTTON
-                ============================================ */
-        .action-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #d45a7a, #b84164);
-            border: none;
-            padding: 16px 50px;
-            border-radius: 60px;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 12px 32px -8px rgba(180, 70, 100, 0.35);
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            letter-spacing: 0.3px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-            animation: shimmer 4s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translate(-30%, -30%) rotate(0deg); }
-            100% { transform: translate(30%, 30%) rotate(360deg); }
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #c04a6a, #a83858);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 48px -10px rgba(180, 70, 100, 0.45);
-        }
-
-        .submit-btn:active {
-            transform: scale(0.97);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: default;
-            transform: none !important;
-            box-shadow: 0 6px 14px -6px rgba(180, 70, 100, 0.2);
-        }
-
-        /* ============================================
-                   RESPONSE
-                ============================================ */
-        #response-message {
-            margin-top: 24px;
-            padding: 20px 26px;
-            border-radius: 36px;
-            font-weight: 600;
-            font-size: 1.05rem;
-            text-align: center;
-            width: 100%;
-            display: none;
-            line-height: 1.7;
-            animation: slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(25px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        #response-message.show {
-            display: block;
-        }
-
-        #response-message.success {
-            background: linear-gradient(135deg, #e6f7e6, #d4edda);
-            border: 2px solid rgba(159, 212, 165, 0.4);
-            color: #1f6b2e;
-            box-shadow: 0 4px 25px rgba(159, 212, 165, 0.12);
-        }
-
-        #response-message.error {
-            background: linear-gradient(135deg, #fff5f5, #fff0f0);
-            border: 2px solid rgba(248, 194, 194, 0.4);
-            color: #7b2e2e;
-            box-shadow: 0 4px 25px rgba(248, 194, 194, 0.1);
-        }
-
-        /* ============================================
-                   FOOTER
-                ============================================ */
-        .footer-note {
-            margin-top: 22px;
-            text-align: center;
-            color: #ac6c80;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            opacity: 0.6;
-        }
-
-        .footer-note .heart {
-            display: inline-block;
-            animation: heartBeat 1.4s ease-in-out infinite;
-            color: #d45a7a;
-        }
-
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            14% { transform: scale(1.2); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.2); }
-            70% { transform: scale(1); }
-        }
-
-        /* ============================================
-                   CONFETTI
-                ============================================ */
-        #confetti-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        /* ============================================
-                   RESPONSIVE
-                ============================================ */
-        @media (max-width: 650px) {
-            .card {
-                padding: 28px 18px 30px;
-                border-radius: 36px;
-            }
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            .header .subhead {
-                font-size: 0.8rem;
-                padding: 6px 18px;
-            }
-            .her-name-badge {
-                font-size: 1rem;
-                padding: 5px 20px;
-            }
-            .section-title {
-                font-size: 1.1rem;
-            }
-            .question-block {
-                padding: 12px 14px 16px;
-            }
-            .question-block label {
-                font-size: 0.95rem;
-            }
-            .submit-btn {
-                padding: 14px 30px;
-                font-size: 1rem;
-            }
-            #response-message {
-                padding: 16px 18px;
-                font-size: 0.95rem;
-            }
-            .typewriter-wrapper {
-                padding: 14px 16px;
-                min-height: 60px;
-            }
-            #typewriter-text {
-                font-size: 0.95rem;
-            }
-            .progress-section {
-                gap: 10px;
-            }
-            .progress-text {
-                font-size: 0.75rem;
-                min-width: 50px;
-            }
-            #loading-screen h2 {
-                font-size: 1.4rem;
-            }
-            .loader-bar-container {
-                width: 200px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .card {
-                padding: 20px 12px 24px;
-                border-radius: 28px;
-            }
-            .header h1 {
-                font-size: 1.4rem;
-                gap: 8px;
-            }
-            .question-block textarea {
-                font-size: 0.85rem;
-                padding: 10px 12px;
-                min-height: 46px;
-            }
-            .submit-btn {
-                padding: 12px 24px;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>a soft apology · for her</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* --- reset & base --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #faf0f0;
+      background-image: radial-gradient(circle at 30% 10%, #ffe6e6 0%, #fcd5d5 80%);
+      font-family: 'Quicksand', sans-serif;
+      padding: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* --- main card with floating animation --- */
+    .card {
+      max-width: 700px;
+      width: 100%;
+      background: rgba(255, 248, 245, 0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 48px;
+      box-shadow: 0 20px 50px rgba(180, 100, 100, 0.15), 0 8px 20px rgba(160, 80, 80, 0.08);
+      padding: 2.8rem 2.5rem 3.2rem;
+      border: 1px solid rgba(255, 220, 220, 0.5);
+      text-align: center;
+      animation: float 6s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* --- decorative star with twinkle --- */
+    .card::before {
+      content: "✦";
+      display: block;
+      font-size: 2.2rem;
+      color: #dba8a8;
+      opacity: 0.6;
+      letter-spacing: 12px;
+      margin-bottom: 0.3rem;
+      animation: twinkle 2.4s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.4; transform: scale(0.95); }
+      50% { opacity: 0.9; transform: scale(1.1); }
+    }
+
+    /* --- heading with gentle slide-in --- */
+    h1 {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 3.8rem;
+      color: #7a4a4a;
+      margin-top: -0.2rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.5px;
+      text-shadow: 2px 2px 0 rgba(255, 200, 200, 0.2);
+      animation: slideFade 1.2s ease-out;
+    }
+
+    @keyframes slideFade {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .subhead {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #a76f6f;
+      background: rgba(255, 235, 235, 0.6);
+      display: inline-block;
+      padding: 0.3rem 1.8rem;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(2px);
+      margin-bottom: 1.2rem;
+      border: 1px solid #fadcdc;
+      animation: fadeIn 1.6s ease;
+    }
+
+    /* --- image container with hover & entrance --- */
+    .meme-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8rem 1.5rem;
+      flex-wrap: wrap;
+      margin: 1rem 0 1.2rem;
+      animation: fadeIn 2s ease;
+    }
+
+    .meme-container img {
+      max-width: 120px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 6px 18px rgba(140, 80, 80, 0.12);
+      border: 2px solid rgba(255, 220, 220, 0.5);
+      background: #fff9f9;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      animation: gentleWiggle 4s ease-in-out infinite;
+    }
+
+    .meme-container img:hover {
+      transform: scale(1.06) rotate(-2deg);
+      box-shadow: 0 12px 28px rgba(160, 80, 80, 0.2);
+    }
+
+    @keyframes gentleWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(2deg); }
+      75% { transform: rotate(-2deg); }
+    }
+
+    .meme-container .caption {
+      font-size: 0.9rem;
+      color: #7a5858;
+      background: rgba(255, 235, 235, 0.5);
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+      border: 1px solid #fad2d2;
+      animation: pulseText 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    /* --- message box with soft glow pulse --- */
+    .message-box {
+      background: rgba(255, 245, 245, 0.5);
+      padding: 1.8rem 1.8rem 2rem;
+      border-radius: 32px;
+      margin: 1.2rem 0 1.8rem;
+      border: 1px solid #fad2d2;
+      box-shadow: inset 0 2px 8px rgba(190, 120, 120, 0.04);
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(200, 140, 140, 0.1); }
+      50% { box-shadow: 0 0 20px 6px rgba(200, 140, 140, 0.08); }
+    }
+
+    .message-box p {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #3f2a2a;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .message-box .highlight {
+      font-family: 'Caveat', cursive;
+      font-weight: 600;
+      font-size: 1.7rem;
+      color: #a14b4b;
+      display: inline-block;
+      margin: 0 0.1rem;
+      animation: popHighlight 2s ease-in-out infinite;
+    }
+
+    @keyframes popHighlight {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); color: #b85a5a; }
+    }
+
+    .message-box .soft-break {
+      display: block;
+      margin: 0.6rem 0;
+    }
+
+    /* --- reason list with staggered entrance --- */
+    .reason-list {
+      text-align: left;
+      background: rgba(255, 240, 235, 0.4);
+      border-radius: 28px;
+      padding: 1.4rem 2rem 1.6rem 2.8rem;
+      margin: 1.2rem 0 1.4rem;
+      list-style: none;
+      border: 1px solid #f0cfcf;
+    }
+
+    .reason-list li {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #432e2e;
+      padding: 0.5rem 0 0.5rem 1.8rem;
+      position: relative;
+      border-bottom: 1px dashed #f0d6d6;
+      opacity: 0;
+      animation: listFadeIn 0.6s ease forwards;
+    }
+
+    .reason-list li:nth-child(1) { animation-delay: 0.2s; }
+    .reason-list li:nth-child(2) { animation-delay: 0.4s; }
+    .reason-list li:nth-child(3) { animation-delay: 0.6s; }
+    .reason-list li:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes listFadeIn {
+      0% { opacity: 0; transform: translateX(-10px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .reason-list li:last-child {
+      border-bottom: none;
+    }
+
+    .reason-list li::before {
+      content: "·";
+      font-size: 2.2rem;
+      color: #c28282;
+      position: absolute;
+      left: -0.2rem;
+      top: -0.1rem;
+      font-weight: 300;
+    }
+
+    .reason-list li strong {
+      font-weight: 600;
+      color: #7a4040;
+    }
+
+    /* --- forgiveness section with heartbeat --- */
+    .forgiveness-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem 1.2rem;
+      margin: 1.8rem 0 1.2rem;
+      background: rgba(255, 228, 228, 0.3);
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
+      border: 1px solid #fad2d2;
+      animation: fadeIn 2.2s ease;
+    }
+
+    .forgiveness-section .heart-icon {
+      font-size: 1.6rem;
+      display: inline-block;
+      animation: heartbeat 1.6s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14% { transform: scale(1.25); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.2); }
+      56% { transform: scale(1); }
+    }
+
+    .forgiveness-section span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #573b3b;
+    }
+
+    /* --- buttons with subtle pulse and hover --- */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .btn {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.8rem 2.2rem;
+      border: none;
+      border-radius: 60px;
+      background: #f5e1e1;
+      color: #553838;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 10px rgba(160, 100, 100, 0.08);
+      border: 1px solid #f0cfcf;
+      backdrop-filter: blur(2px);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.4px;
+      animation: fadeIn 2.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn-primary {
+      background: #dbb0b0;
+      border-color: #c99a9a;
+      color: #3d2626;
+      font-weight: 600;
+      box-shadow: 0 6px 14px rgba(170, 110, 110, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: #cf9e9e;
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 10px 24px rgba(170, 100, 100, 0.25);
+      border-color: #b88282;
+    }
+
+    .btn-secondary:hover {
+      background: #ecd2d2;
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 10px 24px rgba(160, 100, 100, 0.15);
+    }
+
+    .btn:active {
+      transform: scale(0.94);
+    }
+
+    /* --- extra message with fade & slide --- */
+    #extra-message {
+      font-size: 1rem;
+      color: #7a5252;
+      background: rgba(255, 240, 235, 0.5);
+      padding: 0.8rem 1.2rem;
+      border-radius: 60px;
+      margin-top: 1rem;
+      transition: all 0.4s ease;
+      border: 1px dashed #dbb6b6;
+      display: inline-block;
+      backdrop-filter: blur(2px);
+      min-height: 3.2rem;
+      animation: fadeIn 2.6s ease;
+    }
+
+    /* --- hidden audio player --- */
+    .hidden-audio {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    /* --- signature with shimmer --- */
+    .signature {
+      margin-top: 2rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.8rem;
+      color: #8b5e5e;
+      opacity: 0.9;
+      border-top: 1px solid #f0d0d0;
+      padding-top: 1.6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; text-shadow: 0 0 8px rgba(180, 120, 120, 0.2); }
+    }
+
+    .signature small {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #997373;
+      letter-spacing: 0.5px;
+    }
+
+    /* --- shared fadeIn --- */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* --- responsive --- */
+    @media (max-width: 550px) {
+      .card {
+        padding: 2rem 1.5rem 2.2rem;
+        border-radius: 32px;
+      }
+      h1 {
+        font-size: 2.9rem;
+      }
+      .message-box p {
+        font-size: 1.1rem;
+      }
+      .reason-list {
+        padding: 1rem 1.2rem 1rem 2rem;
+      }
+      .reason-list li {
+        font-size: 0.95rem;
+        padding: 0.4rem 0 0.4rem 1.4rem;
+      }
+      .btn {
+        padding: 0.7rem 1.8rem;
+        font-size: 0.95rem;
+      }
+      .signature {
+        font-size: 1.5rem;
+      }
+      .meme-container img {
+        max-width: 90px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .forgiveness-section {
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0.8rem 1rem;
+      }
+      .btn-group {
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn {
+        width: 80%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ===== FLOATING LOVE / FLOWER / ICE CREAM ELEMENTS ===== -->
-    <div class="floating-elements">
-        <span>🌸</span>
-        <span>💐</span>
-        <span>🍦</span>
-        <span>💕</span>
-        <span>🌹</span>
-        <span>💖</span>
-        <span>🌺</span>
-        <span>🍫</span>
-        <span>💗</span>
-        <span>🌷</span>
-    </div>
-
-    <!-- ==========================================
-    BACKGROUND MUSIC (Auto-plays)
-    ========================================== -->
-    <audio id="bgMusic" loop autoplay>
-        <source src="https://raw.githubusercontent.com/stablesterling/formwonuse/main/rom.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- ==========================================
-    LOADING SCREEN
-    ========================================== -->
-    <div id="loading-screen">
-        <div class="loader-emoji">💕</div>
-        <h2>Loading something special...</h2>
-        <div class="loader-bar-container">
-            <div class="loader-bar" id="loaderBar"></div>
-        </div>
-        <div class="loader-text" id="loaderText">0%</div>
-    </div>
-
-    <!-- ==========================================
-    CONFETTI CANVAS
-    ========================================== -->
-    <canvas id="confetti-canvas"></canvas>
-
-    <!-- ==========================================
-    MAIN CARD
-    ========================================== -->
-    <div class="card" id="mainCard">
-
-        <!-- ===== PROGRESS BAR ===== -->
-        <div class="progress-section">
-            <div class="progress-track">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <span class="progress-text" id="progressText">0/10</span>
-        </div>
-
-        <!-- ===== HEADER ===== -->
-        <div class="header">
-            <div class="deco-line"></div>
-            <h1>
-                <span>🌸</span>
-                Getting to Know You
-                <span>💕</span>
-            </h1>
-            <div class="subhead">✨ I genuinely want to know the real you ✨</div>
-            <div class="her-name-badge">👩 <span id="herNameDisplay">[Lechuzzz💕]</span></div>
-        </div>
-
-        <!-- ===== TYPEWRITER INTRO ===== -->
-        <div class="typewriter-wrapper">
-            <div id="typewriter-text">
-                <span class="cursor"></span>
-            </div>
-        </div>
-
-        <form id="questionForm">
-
-            <!-- ===== SECTION 1: ALL ABOUT HER ===== -->
-            <div class="section-title">
-                <span>🌷</span> All About You
-                <span class="badge">your world</span>
-            </div>
-
-            <div class="question-block" data-index="0">
-                <span class="question-number">Q1</span>
-                <label for="q1">
-                    <span class="q-emoji">☕</span>
-                    <span>
-                        What's your go-to comfort drink or food?
-                        <span class="q-hint">(the one that always makes you feel better)</span>
-                    </span>
-                </label>
-                <textarea id="q1" rows="2" placeholder="e.g. Hot chocolate with extra marshmallows..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <div class="question-block" data-index="1">
-                <span class="question-number">Q2</span>
-                <label for="q2">
-                    <span class="q-emoji">🎵</span>
-                    <span>
-                        What song always makes you happy?
-                        <span class="q-hint">(the one you'd dance to in your room)</span>
-                    </span>
-                </label>
-                <textarea id="q2" rows="2" placeholder="e.g. Anything by Taylor Swift, honestly..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <div class="question-block" data-index="2">
-                <span class="question-number">Q3</span>
-                <label for="q3">
-                    <span class="q-emoji">🌅</span>
-                    <span>
-                        What's your favorite way to spend a lazy day?
-                        <span class="q-hint">(binge-watching? reading? doing absolutely nothing?)</span>
-                    </span>
-                </label>
-                <textarea id="q3" rows="2" placeholder="e.g. Curled up with a good book and some snacks..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <div class="question-block" data-index="3">
-                <span class="question-number">Q4</span>
-                <label for="q4">
-                    <span class="q-emoji">💭</span>
-                    <span>
-                        What's something most people don't know about you?
-                        <span class="q-hint">(a secret talent? a hidden hobby? a random fact?)</span>
-                    </span>
-                </label>
-                <textarea id="q4" rows="2" placeholder="e.g. I can recite the entire first Harry Potter movie..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <div class="question-block" data-index="4">
-                <span class="question-number">Q5</span>
-                <label for="q5">
-                    <span class="q-emoji">😅</span>
-                    <span>
-                        What's one thing you absolutely cannot stand?
-                        <span class="q-hint">(a pet peeve? something that drives you crazy?)</span>
-                    </span>
-                </label>
-                <textarea id="q5" rows="2" placeholder="e.g. People who chew loudly... it drives me insane!" oninput="updateProgress()"></textarea>
-            </div>
-
-            <div class="question-block important" data-index="5">
-                <span class="question-number">Q6</span>
-                <label for="q6">
-                    <span class="q-emoji">😊</span>
-                    <span>
-                        What's the one thing that makes you truly happy? (and no, you can't say ice cream! 😉)
-                        <span class="q-hint">(think deep — what really lights up your soul?)</span>
-                    </span>
-                </label>
-                <textarea id="q6" rows="2" placeholder="e.g. When someone remembers the small things about me..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <!-- ===== SECTION 2: ABOUT ME ===== -->
-            <div class="section-title">
-                <span>💗</span> What Do You Think About Me?
-                <span class="badge pink">be honest 😊</span>
-            </div>
-
-            <div class="question-block about-you" data-index="6">
-                <span class="question-number">Q7</span>
-                <label for="q7">
-                    <span class="q-emoji">😊</span>
-                    <span>
-                        What's one thing you like about me?
-                        <span class="q-hint">(it can be anything — big or small)</span>
-                    </span>
-                </label>
-                <textarea id="q7" rows="2" placeholder="e.g. I like how you always make me laugh..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <div class="question-block about-you" data-index="7">
-                <span class="question-number">Q8</span>
-                <label for="q8">
-                    <span class="q-emoji">🤔</span>
-                    <span>
-                        What's something you're curious about when it comes to me?
-                        <span class="q-hint">(anything you've wanted to ask but haven't yet)</span>
-                    </span>
-                </label>
-                <textarea id="q8" rows="2" placeholder="e.g. I wonder what you were like as a kid..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <div class="question-block about-you" data-index="8">
-                <span class="question-number">Q9</span>
-                <label for="q9">
-                    <span class="q-emoji">💭</span>
-                    <span>
-                        What do you think I should know about you?
-                        <span class="q-hint">(anything you want me to understand)</span>
-                    </span>
-                </label>
-                <textarea id="q9" rows="2" placeholder="e.g. I'm actually pretty shy at first, but I warm up..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <!-- ===== THE BIG QUESTION ===== -->
-            <div class="section-title" style="margin-top: 30px;">
-                <span>💘</span> The Most Important Question
-                <span class="badge">👀 this one matters</span>
-            </div>
-
-            <div class="question-block important" style="border-left: 4px solid #d45a7a; background: linear-gradient(135deg, rgba(252, 234, 240, 0.45), rgba(255, 240, 245, 0.45));" data-index="9">
-                <span class="question-number">Q10</span>
-                <label for="q10">
-                    <span class="q-emoji">💕</span>
-                    <span>
-                        What should I do to make you my girlfriend? (be honest! I'm listening 👂)
-                        <span class="q-hint">(tell me exactly what would win your heart — I'll do it 💪)</span>
-                    </span>
-                </label>
-                <textarea id="q10" rows="3" placeholder="e.g. I need someone who listens, who's patient, and who makes me feel safe..." oninput="updateProgress()"></textarea>
-            </div>
-
-            <!-- ===== SUBMIT ===== -->
-            <div class="action-area">
-                <button type="button" class="submit-btn" id="submitBtn">
-                    <span>💌</span> Send It to Me
-                </button>
-
-                <div id="response-message"></div>
-            </div>
-
-        </form>
-
-        <div class="footer-note">
-            <span class="heart">❤️</span> Every answer matters to me. I'm genuinely listening. <span class="heart">❤️</span>
-        </div>
-    </div>
-
-    <script>
-        (function() {
-            // ============================================
-            // BACKGROUND MUSIC - AUTO-PLAY WITH FALLBACK
-            // ============================================
-            const audio = document.getElementById('bgMusic');
-            
-            // Try to play automatically
-            audio.play().catch(function(error) {
-                console.log('Auto-play blocked. Will play on user interaction.');
-                // Play on any click if auto-play is blocked
-                document.addEventListener('click', function playOnClick() {
-                    audio.play();
-                    document.removeEventListener('click', playOnClick);
-                }, { once: true });
-            });
-
-            // ============================================
-            // DISCORD WEBHOOK
-            // ============================================
-            const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1517232704947622090/BIhg1IUytp7pSm0cKzMoiZIOJq9x7pIDsUgOk1nPoCWaDDGRMUHvq6V1stT4fhsZv-j3';
-
-            // ============================================
-            // LOADING SCREEN
-            // ============================================
-            const loadingScreen = document.getElementById('loading-screen');
-            const loaderBar = document.getElementById('loaderBar');
-            const loaderText = document.getElementById('loaderText');
-            const mainCard = document.getElementById('mainCard');
-
-            let loadProgress = 0;
-
-            function simulateLoading() {
-                const interval = setInterval(() => {
-                    loadProgress += Math.random() * 8 + 2;
-                    if (loadProgress >= 100) {
-                        loadProgress = 100;
-                        clearInterval(interval);
-                        setTimeout(() => {
-                            loadingScreen.classList.add('hidden');
-                            mainCard.classList.add('visible');
-                            setTimeout(startTypewriter, 500);
-                        }, 400);
-                    }
-                    loaderBar.style.width = loadProgress + '%';
-                    loaderText.textContent = Math.round(loadProgress) + '%';
-                }, 180);
-            }
-
-            simulateLoading();
-
-            // ============================================
-            // TYPEWRITER EFFECT
-            // ============================================
-            const typewriterEl = document.getElementById('typewriter-text');
-            const herName = "Lechusssss💕"; // <-- CHANGE THIS TO HER NAME!
-
-            const typewriterLines = [
-                `Hey <span class="highlight">${herName}</span> 👋`,
-                `I've been thinking about you... 💭`,
-                `And I realized — I don't know enough about you yet.`,
-                `So I made this little questionnaire. 💕`,
-                `Take your time. I'm listening. 👂`
-            ];
-
-            let lineIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let currentText = '';
-
-            function startTypewriter() {
-                typewriterEl.innerHTML = '';
-                lineIndex = 0;
-                charIndex = 0;
-                isDeleting = false;
-                typeNextLine();
-            }
-
-            function typeNextLine() {
-                if (lineIndex >= typewriterLines.length) {
-                    return;
-                }
-
-                const fullLine = typewriterLines[lineIndex];
-                const speed = 40;
-
-                if (!isDeleting) {
-                    if (charIndex < fullLine.length) {
-                        currentText = fullLine.substring(0, charIndex + 1);
-                        typewriterEl.innerHTML = currentText + '<span class="cursor"></span>';
-                        charIndex++;
-                        setTimeout(typeNextLine, speed + Math.random() * 20);
-                    } else {
-                        isDeleting = true;
-                        setTimeout(typeNextLine, 1200);
-                    }
-                } else {
-                    if (lineIndex < typewriterLines.length - 1) {
-                        if (charIndex > 0) {
-                            currentText = fullLine.substring(0, charIndex - 1);
-                            typewriterEl.innerHTML = currentText + '<span class="cursor"></span>';
-                            charIndex--;
-                            setTimeout(typeNextLine, 20);
-                        } else {
-                            isDeleting = false;
-                            lineIndex++;
-                            charIndex = 0;
-                            typewriterEl.innerHTML = '<span class="cursor"></span>';
-                            setTimeout(typeNextLine, 200);
-                        }
-                    } else {
-                        typewriterEl.innerHTML = fullLine + '<span class="cursor"></span>';
-                        setInterval(() => {
-                            const cursor = typewriterEl.querySelector('.cursor');
-                            if (cursor) {
-                                cursor.style.animation = 'blink 0.8s step-end infinite';
-                            }
-                        }, 100);
-                    }
-                }
-            }
-
-            // ============================================
-            // PROGRESS BAR
-            // ============================================
-            const fields = [
-                document.getElementById('q1'),
-                document.getElementById('q2'),
-                document.getElementById('q3'),
-                document.getElementById('q4'),
-                document.getElementById('q5'),
-                document.getElementById('q6'),
-                document.getElementById('q7'),
-                document.getElementById('q8'),
-                document.getElementById('q9'),
-                document.getElementById('q10')
-            ];
-
-            const progressFill = document.getElementById('progressFill');
-            const progressText = document.getElementById('progressText');
-
-            function updateProgress() {
-                let filled = 0;
-                for (let field of fields) {
-                    if (field.value.trim() !== '') {
-                        filled++;
-                    }
-                }
-                const total = fields.length;
-                const percent = (filled / total) * 100;
-                progressFill.style.width = percent + '%';
-                progressText.textContent = filled + '/' + total;
-
-                if (filled === total) {
-                    progressFill.style.background = 'linear-gradient(90deg, #d45a7a, #ff6b8a, #d45a7a)';
-                    progressFill.style.backgroundSize = '200% 100%';
-                    progressFill.style.animation = 'shimmerProgress 2s ease-in-out infinite';
-                } else {
-                    progressFill.style.background = 'linear-gradient(90deg, #d45a7a, #b84164)';
-                    progressFill.style.animation = 'none';
-                }
-            }
-
-            const progressStyle = document.createElement('style');
-            progressStyle.textContent = `
-                        @keyframes shimmerProgress {
-                            0% { background-position: 0% 0%; }
-                            100% { background-position: 200% 0%; }
-                        }
-                    `;
-            document.head.appendChild(progressStyle);
-
-            // ============================================
-            // CONFETTI
-            // ============================================
-            function launchConfetti() {
-                const canvas = document.getElementById('confetti-canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-
-                const particles = [];
-                const colors = ['#d45a7a', '#f8c2d5', '#ff6b8a', '#ffb3c6', '#ff8da1', '#ff4d6d', '#ffd700', '#ff6b6b', '#ff9ff3', '#f368e0'];
-
-                for (let i = 0; i < 200; i++) {
-                    particles.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height - canvas.height,
-                        w: Math.random() * 14 + 4,
-                        h: Math.random() * 10 + 4,
-                        color: colors[Math.floor(Math.random() * colors.length)],
-                        speed: Math.random() * 10 + 4,
-                        rotation: Math.random() * 360,
-                        rotSpeed: (Math.random() - 0.5) * 12,
-                        drift: (Math.random() - 0.5) * 2.5
-                    });
-                }
-
-                let frame = 0;
-
-                function animate() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                    let active = false;
-                    for (let p of particles) {
-                        p.y += p.speed;
-                        p.x += p.drift + Math.sin(frame / 40 + p.y / 80) * 0.8;
-                        p.rotation += p.rotSpeed;
-
-                        if (p.y < canvas.height + 50) {
-                            active = true;
-                            ctx.save();
-                            ctx.translate(p.x, p.y);
-                            ctx.rotate((p.rotation * Math.PI) / 180);
-                            ctx.fillStyle = p.color;
-                            ctx.shadowColor = p.color;
-                            ctx.shadowBlur = 12;
-                            ctx.globalAlpha = 0.9;
-                            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-                            ctx.restore();
-                        }
-                    }
-
-                    frame++;
-                    if (active) {
-                        requestAnimationFrame(animate);
-                    } else {
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    }
-                }
-
-                animate();
-
-                setTimeout(() => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                }, 6000);
-            }
-
-            // ============================================
-            // DISCORD NOTIFICATION FUNCTION
-            // ============================================
-            function sendDiscordNotification(answers) {
-                const embed = {
-                    title: "🌸 New Questionnaire Answers!",
-                    description: `${herName} just submitted their answers! 💕`,
-                    color: 0xd45a7a,
-                    timestamp: new Date().toISOString(),
-                    fields: [
-                        {
-                            name: "☕ Q1: Comfort Drink/Food",
-                            value: answers.q1 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "🎵 Q2: Happy Song",
-                            value: answers.q2 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "🌅 Q3: Favorite Lazy Day",
-                            value: answers.q3 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "💭 Q4: Something People Don't Know",
-                            value: answers.q4 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "😅 Q5: Can't Stand",
-                            value: answers.q5 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "😊 Q6: What Makes You Truly Happy",
-                            value: answers.q6 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "💗 Q7: What You Like About Me",
-                            value: answers.q7 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "🤔 Q8: Curious About Me",
-                            value: answers.q8 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "💭 Q9: What I Should Know About You",
-                            value: answers.q9 || "Not answered",
-                            inline: false
-                        },
-                        {
-                            name: "💘 Q10: How to Make You My Girlfriend",
-                            value: answers.q10 || "Not answered",
-                            inline: false
-                        }
-                    ],
-                    footer: {
-                        text: "💕 From the Getting to Know You page"
-                    }
-                };
-
-                const payload = {
-                    embeds: [embed]
-                };
-
-                fetch(DISCORD_WEBHOOK, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('✅ Answers sent to Discord successfully!');
-                    } else {
-                        console.error('❌ Failed to send to Discord:', response.status);
-                    }
-                })
-                .catch(error => {
-                    console.error('❌ Error sending to Discord:', error);
-                });
-            }
-
-            // ============================================
-            // FORM HANDLING
-            // ============================================
-            const submitBtn = document.getElementById('submitBtn');
-            const responseDiv = document.getElementById('response-message');
-
-            document.getElementById('herNameDisplay').textContent = herName;
-
-            function hasEmptyFields() {
-                for (let field of fields) {
-                    if (field.value.trim() === '') return true;
-                }
-                return false;
-            }
-
-            function getAnswers() {
-                return {
-                    q1: fields[0].value.trim(),
-                    q2: fields[1].value.trim(),
-                    q3: fields[2].value.trim(),
-                    q4: fields[3].value.trim(),
-                    q5: fields[4].value.trim(),
-                    q6: fields[5].value.trim(),
-                    q7: fields[6].value.trim(),
-                    q8: fields[7].value.trim(),
-                    q9: fields[8].value.trim(),
-                    q10: fields[9].value.trim()
-                };
-            }
-
-            function handleSubmit() {
-                responseDiv.className = '';
-                responseDiv.innerHTML = '';
-
-                if (hasEmptyFields()) {
-                    responseDiv.className = 'show error';
-                    responseDiv.innerHTML = `
-                                <span style="font-size:2rem;">😊</span>
-                                You left some questions blank — that's okay!<br>
-                                <span style="font-weight:400; font-size:0.95rem;">Just fill in what you're comfortable with. I'd love to know. 💕</span>
-                            `;
-                    responseDiv.style.animation = 'none';
-                    setTimeout(() => {
-                        responseDiv.style.animation = 'shake 0.35s ease';
-                    }, 10);
-                    return;
-                }
-
-                const answers = getAnswers();
-
-                // SEND TO DISCORD!
-                sendDiscordNotification(answers);
-
-                // LAUNCH CONFETTI! 🎉
-                launchConfetti();
-
-                const compliments = [
-                    `You're genuinely one of the most interesting people I've met. 💕`,
-                    `I love how thoughtful your answers are — you're amazing. 🌸`,
-                    `Every answer you gave made me smile. You're special. ✨`,
-                    `I feel so lucky to know you. Seriously. 💗`,
-                    `You're incredible — and I'm not just saying that. 😊`
-                ];
-                const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
-
-                const responseHTML = `
-                            <span style="font-size:3rem; display:block;">🥹💖</span>
-                            <strong style="font-size:1.3rem;">${herName}… you have no idea how happy this made me.</strong><br><br>
-                            <span style="font-weight:400; display:block; max-width:90%; margin:0 auto; font-size:0.95rem;">
-                                I read every single word you wrote.<br><br>
-                                <span style="font-weight:600;">💬 What makes you truly happy:</span><br>
-                                “${answers.q6}”<br><br>
-                                <span style="font-weight:600;">💬 What you like about me:</span><br>
-                                “${answers.q7}”<br><br>
-                                <span style="font-weight:600;">💘 And most importantly — what I should do to make you my girlfriend:</span><br>
-                                “${answers.q10}”
-                            </span>
-                            <div style="background:rgba(212, 90, 122, 0.06); padding:14px 20px; border-radius:28px; margin:14px 0 6px 0; font-weight:400; font-size:0.95rem; text-align:left; max-width:95%; margin-left:auto; margin-right:auto; border:1px solid rgba(212, 90, 122, 0.1);">
-                                <span style="font-weight:700;">👂 I'm listening.</span><br>
-                                I promise I'll take everything you said to heart.<br>
-                                ${answers.q10 ? `Especially this: "<span style="font-weight:600; color:#7a2e4a;">${answers.q10}</span>"` : ''}
-                            </div>
-                            <span style="font-weight:500; display:block; margin-top:12px; font-size:1.05rem; color:#6f2c44;">
-                                ${randomCompliment}
-                            </span>
-                            <span style="font-weight:700; display:block; margin-top:12px; font-size:1.15rem; color:#b84164;">
-                                💘 Thank you for being honest with me. That means everything.
-                            </span>
-                            <span style="font-weight:400; display:block; margin-top:6px; font-size:0.95rem; color:#6f2c44;">
-                                I'm going to work on being the person you deserve. 🌹
-                            </span>
-                            <br>
-                            <span style="font-weight:400; display:block; font-size:0.85rem; color:#8a6a7e; opacity:0.7;">
-                                📨 Your answers have been sent to me! I'll read them right away. 💕
-                            </span>
-                        `;
-
-                responseDiv.className = 'show success';
-                responseDiv.innerHTML = responseHTML;
-                submitBtn.disabled = true;
-                submitBtn.textContent = '✅ Sent!';
-                submitBtn.style.opacity = '0.6';
-            }
-
-            // --- Event listeners ---
-            submitBtn.addEventListener('click', handleSubmit);
-
-            fields.forEach(field => {
-                field.addEventListener('keydown', (e) => {
-                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                        e.preventDefault();
-                        handleSubmit();
-                    }
-                });
-            });
-
-            fields.forEach(field => {
-                field.addEventListener('input', function() {
-                    if (responseDiv.classList.contains('show') && !submitBtn.disabled) {
-                        responseDiv.className = '';
-                        responseDiv.innerHTML = '';
-                    }
-                    updateProgress();
-                });
-            });
-
-            // --- Shake animation ---
-            const shakeStyle = document.createElement('style');
-            shakeStyle.textContent = `
-                        @keyframes shake {
-                            0% { transform: translateX(0); }
-                            20% { transform: translateX(-8px); }
-                            40% { transform: translateX(8px); }
-                            60% { transform: translateX(-5px); }
-                            80% { transform: translateX(5px); }
-                            100% { transform: translateX(0); }
-                        }
-                    `;
-            document.head.appendChild(shakeStyle);
-
-            // ============================================
-            // RESIZE CONFETTI CANVAS
-            // ============================================
-            window.addEventListener('resize', () => {
-                const canvas = document.getElementById('confetti-canvas');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-
-        })();
-    </script>
+<div class="card" role="main" aria-label="apology card">
+
+  <h1>i'm so sorry mwonuss</h1>
+  <div class="subhead">for making you angry &amp; sad</div>
+
+  <!-- Image with crying cat meme -->
+  <div class="meme-container">
+    <img 
+      src="https://github.com/stablesterling/apomwon/blob/main/Crying%20Cat%20Meme%20Png%20Image%20With%20Transparent%20Background.jpg?raw=true" 
+      alt="A crying cat meme, expressing sadness and regret" 
+      loading="lazy"
+    />
+    <span class="caption">🥺 me right now</span>
+  </div>
+
+  <div class="message-box">
+    <p>
+      <span class="highlight">please</span> know that
+      <span class="highlight">none of it</span> was ever my intention.
+      <span class="soft-break"></span>
+      I see your hurt, I feel your sadness —
+      and it breaks me to know I caused it.
+    </p>
+    <p style="font-size: 1.1rem; margin-top: 0.6rem; color: #5c3d3d;">
+      you are <strong>so important</strong> to me.
+    </p>
+  </div>
+
+  <!-- specific reasons -->
+  <ul class="reason-list">
+    <li><strong>I was careless</strong> with my words &nbsp;— and I deeply regret that.</li>
+    <li><strong>I didn't listen</strong> the way you deserved to be heard.</li>
+    <li><strong>I let my own frustration</strong> get in the way of seeing yours.</li>
+  </ul>
+
+  <!-- forgiveness section with heartbeat -->
+  <div class="forgiveness-section">
+    <span class="heart-icon" aria-hidden="true">❤️‍🩹</span>
+    <span>I know I can't undo the past, but I promise to do better.</span>
+    <span class="heart-icon" aria-hidden="true">🕊️</span>
+  </div>
+
+  <!-- interactive buttons -->
+  <div class="btn-group">
+    <button class="btn btn-primary" id="showPromiseBtn">🌷 I promise</button>
+    <button class="btn btn-secondary" id="showExtraBtn">💬 tell me more</button>
+  </div>
+
+  <!-- dynamic extra message -->
+  <div id="extra-message">
+    <span>i'm here, and i'm listening.</span>
+  </div>
+
+  <!-- Hidden audio player with improved autoplay logic -->
+  <audio id="bgMusic" loop>
+    <source src="https://raw.githubusercontent.com/stablesterling/apomwon/main/i-have-no-enemies-ahh-sound-made-with-Voicemod.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- signature -->
+  <div class="signature">
+    <span>always yours,</span>
+    <span style="font-weight: 600;">with all my heart</span>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    // ============================================
+    // DISCORD WEBHOOK - PAGE VIEW NOTIFICATION
+    // ============================================
+    // ✅ UPDATED WITH YOUR NEW WEBHOOK URL ✅
+    const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1526920905442459699/eWb3QUGOQmb-D5doUeBaQrGc1Dze_U-g17U8z5jz6CPd3ZWBJeujMveDJfYkx7GuiOiK';
+
+    function sendPageViewNotification() {
+      const now = new Date();
+      const timestamp = now.toLocaleString('en-US', { 
+        timeZone: 'UTC',
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+
+      const embed = {
+        title: "💕 Someone is viewing the apology page!",
+        description: "Your special someone has opened the page. 💖",
+        color: 0xd45a7a,
+        timestamp: new Date().toISOString(),
+        fields: [
+          {
+            name: "👤 Visitor",
+            value: "💕 [mwonuss] is here!",
+            inline: true
+          },
+          {
+            name: "🕐 Time",
+            value: timestamp + " UTC",
+            inline: true
+          },
+          {
+            name: "📱 Device Info",
+            value: navigator.userAgent || "Unknown",
+            inline: false
+          },
+          {
+            name: "🌐 Page URL",
+            value: window.location.href || "Direct visit",
+            inline: false
+          }
+        ],
+        footer: {
+          text: "💕 Apology Page • Page View Notification"
+        }
+      };
+
+      const payload = {
+        embeds: [embed],
+        content: "@everyone 💕 Your special someone is here! 💕"
+      };
+
+      fetch(DISCORD_WEBHOOK, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('✅ Page view notification sent to Discord!');
+        } else {
+          console.error('❌ Failed to send notification:', response.status);
+        }
+      })
+      .catch(error => {
+        console.error('❌ Error sending notification:', error);
+      });
+    }
+
+    // ============================================
+    // BACKGROUND MUSIC - AUTO-PLAY WITH FALLBACK
+    // ============================================
+    const audio = document.getElementById('bgMusic');
+    
+    // Try to play automatically
+    audio.play().catch(function(error) {
+      console.log('Auto-play blocked. Will play on user interaction.');
+      // Play on any click if auto-play is blocked
+      document.addEventListener('click', function playOnClick() {
+        audio.play();
+        document.removeEventListener('click', playOnClick);
+      }, { once: true });
+    });
+
+    // ============================================
+    // SEND PAGE VIEW NOTIFICATION ON LOAD
+    // ============================================
+    window.addEventListener('load', function() {
+      // Send Discord notification
+      sendPageViewNotification();
+
+      // Set default message
+      const extraDiv = document.getElementById('extra-message');
+      extraDiv.textContent = "i'm here, and i'm listening.";
+      extraDiv.style.animation = 'fadeIn 0.8s ease';
+    });
+
+    // ============================================
+    // EXISTING APOLOGY PAGE LOGIC
+    // ============================================
+    const extraDiv = document.getElementById('extra-message');
+    const defaultMessage = "i'm here, and i'm listening.";
+
+    const promiseMessages = [
+      "🌱 I promise to choose my words with more care.",
+      "🕊️ I promise to hold space for your feelings.",
+      "💞 I promise to be more patient and understanding.",
+      "🌷 I promise to show up better, for you, for us.",
+      "✨ I promise to never stop trying to be worthy of you."
+    ];
+
+    const extraMessages = [
+      "you are not too much. you are not hard to love.",
+      "your anger is valid. your sadness matters. i see it all.",
+      "i wish i could take back every moment that made you cry.",
+      "you deserve softness, not sharpness. i'll do better.",
+      "thank you for still being here. i don't take that for granted."
+    ];
+
+    let promiseIndex = 0;
+    let extraIndex = 0;
+
+    function setMessage(text, animate = true) {
+      extraDiv.textContent = text;
+      if (animate) {
+        extraDiv.style.animation = 'none';
+        void extraDiv.offsetWidth;
+        extraDiv.style.animation = 'fadeIn 0.5s ease';
+      }
+    }
+
+    document.getElementById('showPromiseBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      const msg = promiseMessages[promiseIndex % promiseMessages.length];
+      setMessage(msg);
+      promiseIndex++;
+    });
+
+    document.getElementById('showExtraBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      const msg = extraMessages[extraIndex % extraMessages.length];
+      setMessage(msg);
+      extraIndex++;
+    });
+
+    extraDiv.addEventListener('dblclick', function() {
+      setMessage(defaultMessage);
+    });
+
+  })();
+</script>
 
 </body>
 </html>
